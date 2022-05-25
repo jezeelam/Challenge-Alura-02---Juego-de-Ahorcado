@@ -10,7 +10,7 @@ const letrasPresionadas = document.querySelector('.presionadas');
 pincel.strokeStyle = "#000000"; 
 pincel.lineWidth = 4;
 
-let adivinar = ["PERDON", "MIENTRAS", "PERECE", "CAOS", "PEDRO", "CASTRO", "BOLA", "CASA", "CANCHA", "ALITAS"];
+let adivinar = ["PERDON", "MIENTRAS", "PERECE", "CAOS", "PEDRO", "CASTRO", "BOLA", "CASA", "CANCHA", "ALITAS", "MEXICO", "COLOMBIA", "WEB", "ECUADOR", "PERU", "BRAZIL", "AMERICA","CELULAR","LLUVIA","DISCORD","ALURA","PANAMA","HONDURAS","TECLADO","MAUSE","MONITOR","TORRE","CLASES"];
 let malasLetras = [];   
 let buenasLetras = [];
 let presionadas = [];
