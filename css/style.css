@@ -145,8 +145,13 @@ td {
     height: 5rem;
     text-align: center;
 }
+.swal-footer {
+    display: flex;
+    justify-content: center;
+}
 .swal-button {
-    display: none;
+    background-color: #0A3871;
+    border: none;
 }
 .swal-text {
     font-family: var(--fuente);
