@@ -17,7 +17,7 @@ let buenasLetras = [];
 let presionadas = [];
 let p = [];
 let ganaste;
-let aleatorio = Math.round(Math.random()* adivinar.length);
+let aleatorio = Math.round(Math.random()* (adivinar.length - 1));
 let palabraMisteriosa = adivinar[aleatorio]; 
     
 botonJuego.addEventListener("click", function(e) {
@@ -64,11 +64,11 @@ function canvasOn() {
 function crearCanvas() {
     pantalla.classList.remove('removerCanvas');
 }
-function removerCanvas() {
-    if (borrarCanvas > "") {
-        borrarCanvas.classList.add('removerCanvas');
-    }
-}
+// function removerCanvas() {
+//     if (borrarCanvas > "") {
+//         borrarCanvas.classList.add('removerCanvas');
+//     }
+// }
 function alertaError() {
     swal("Ups!", "Solo letras y que sean mayúsculas, por favor", "error", {button: false});
 }
@@ -213,7 +213,7 @@ function juego(tecla, letra, noPermitidas) {
                   formarPalabra();  
             });
         }  
-        letrasPresionadas.textContent = presionadas.join(" ");
+        letrasPresionadas.textContent = malasLetras.join(" ");
         crearAhoracado();
         crearLetras(tecla, letra);
         if (p.length === buenasLetras.length) {
@@ -242,7 +242,7 @@ function reiniciarJuego () {
     malasLetras = [];   
     buenasLetras = [];
     p.length = 0
-    aleatorio = Math.round(Math.random()* adivinar.length);
+    aleatorio = Math.round(Math.random()* (adivinar.length - 1));
     palabraMisteriosa = adivinar[aleatorio];
     reinciarCanvas();  
 }
