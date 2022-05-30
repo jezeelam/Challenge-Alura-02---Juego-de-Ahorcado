@@ -1,12 +1,11 @@
 const cambiarBotones = document.querySelector('.botones');
 const botonJuego = document.querySelector('.boton1');
 const botonJuego2 = document.querySelector('.boton2');
-const inputOff = document.querySelector('.input');
 const pantalla = document.querySelector('canvas');
 const pincel = pantalla.getContext('2d');
 const letrasMal = document.querySelector('.letrasMalas');
 const letrasPresionadas = document.querySelector('.presionadas');
-let borrarCanvas = document.querySelector("canvas");
+const borrarCanvas = document.querySelector("canvas");
 
 pincel.strokeStyle = "#000000"; 
 pincel.lineWidth = 4;
@@ -26,8 +25,9 @@ botonJuego.addEventListener("click", function(e) {
         canvasOn(); 
         crearCanvas(); 
         presionadasLetras();
-        formarPalabra();
-        escucharLetras();  
+        formarPalabra();  
+        escucharLetras();
+
     }
     if (botonJuego.textContent == "Nuevo Juego") { 
         reiniciarJuego();
@@ -38,11 +38,16 @@ botonJuego.addEventListener("click", function(e) {
 });
 botonJuego2.addEventListener("click", function(e) {
     e.preventDefault();
-    if(botonJuego2.textContent == "Cancelar") {
-        location.reload();
+    if(botonJuego2.textContent == "Desistir") {
+        swal("", "La palabra era "+ palabraMisteriosa + " " , "info", {})
+        .then(() =>{
+            location.reload();  
+      });
+   
     }   
+    
 });
-function escucharLetras() { document.addEventListener("keypress", function(event) {
+function escucharLetras() { document.addEventListener("keydown", function(event) {
     let tecla = event.key;
     let permitidos = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     let noPermitidas = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9']; 
@@ -58,17 +63,12 @@ function canvasOn() {
     botonJuego.classList.add("boton");
     botonJuego2.classList.add("boton");
     letrasPresionadas.classList.remove("sacar");
-    botonJuego2.textContent = "Cancelar"
+    botonJuego2.textContent = "Desistir"
     botonJuego.textContent = "Nuevo Juego"   
 }
 function crearCanvas() {
     pantalla.classList.remove('removerCanvas');
 }
-// function removerCanvas() {
-//     if (borrarCanvas > "") {
-//         borrarCanvas.classList.add('removerCanvas');
-//     }
-// }
 function alertaError() {
     swal("Ups!", "Solo letras y que sean mayúsculas, por favor", "error", {button: false});
 }
