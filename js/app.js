@@ -6,6 +6,8 @@ const pincel = pantalla.getContext('2d');
 const letrasMal = document.querySelector('.letrasMalas');
 const letrasPresionadas = document.querySelector('.presionadas');
 const borrarCanvas = document.querySelector("canvas");
+const teclado = document.querySelector(".teclado");
+const tm = document.querySelectorAll(".teclaAbc");
 
 pincel.strokeStyle = "#000000"; 
 pincel.lineWidth = 4;
@@ -27,6 +29,7 @@ botonJuego.addEventListener("click", function(e) {
         presionadasLetras();
         formarPalabra();  
         escucharLetras();
+        escucharTouch();
 
     }
     if (botonJuego.textContent == "Nuevo Juego") { 
@@ -42,11 +45,47 @@ botonJuego2.addEventListener("click", function(e) {
         swal("", "La palabra era "+ palabraMisteriosa + " " , "info", {})
         .then(() =>{
             location.reload();  
-      });
-   
+      });   
     }   
-    
+   
 });
+function escucharTouch() { teclado.addEventListener("touchstart", function(e) {
+    e.preventDefault();
+    let toque = e.target.textContent;
+    if(toque.length > 1) {
+        alertaTouchfuera();
+    } else { 
+        for (let i = 0; i < palabraMisteriosa.length; i++) {
+            const m = palabraMisteriosa[i];
+            console.log(m);
+            if (toque == m) {
+                crearLetras(m);          
+                e.target.classList.add("acierto");
+            }
+            if (palabraMisteriosa.search(toque) == -1) {
+                if (!malasLetras.includes(toque)) {
+                    malasLetras.push(toque);  
+                    e.target.classList.add("desacierto");
+                }
+            }
+            if (p.length === buenasLetras.length) {
+                ganasteAlerta();
+            } 
+            if(malasLetras.length == 10) {
+                swal("Perdiste!", "La palabra era " + palabraMisteriosa + " " , "error", {
+                    button: "Intentarlo de Nuevo",
+                })
+                .then(() =>{
+                      reiniciarJuego();
+                      presionadasLetras();
+                      formarPalabra();  
+                });
+            } 
+        }
+        crearAhoracado();
+    }
+});
+}
 function escucharLetras() { document.addEventListener("keydown", function(event) {
     let tecla = event.key;
     let permitidos = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
@@ -62,6 +101,7 @@ function canvasOn() {
     cambiarBotones.classList.add("canvasOn");
     botonJuego.classList.add("boton");
     botonJuego2.classList.add("boton");
+    teclado.classList.remove("sacar");
     letrasPresionadas.classList.remove("sacar");
     botonJuego2.textContent = "Desistir"
     botonJuego.textContent = "Nuevo Juego"   
@@ -71,6 +111,9 @@ function crearCanvas() {
 }
 function alertaError() {
     swal("Ups!", "Solo letras y que sean mayúsculas, por favor", "error", {button: false});
+}
+function alertaTouchfuera() {
+    swal("Ups!", "No le diste a la letra", "error", {button: false});
 }
 function crearTd() {
     let tdletra = document.createElement("td");
@@ -128,12 +171,12 @@ function crearAhoracado() {
         pincel.stroke();
     }  
 }
-function crearLetras(tecla) {
+function crearLetras(tecla, m) {
     let td = document.querySelectorAll("td");
     td.forEach( () => {
         for (let i = 0; i < palabraMisteriosa.length; i++) {
             const a = palabraMisteriosa[i];
-            if(tecla == a) {
+            if(tecla == a || m == a) {
                 td[i].textContent = a;
                 meterLetras(tecla);
             }
@@ -180,7 +223,7 @@ function slowAlert() {
 }
 function meterLetras(letra) {
     if (!buenasLetras.includes(letra)) {
-        buenasLetras.push(letra);  
+        buenasLetras.push(letra);    
     }
 }
 function presionadasLetras() {
@@ -218,7 +261,6 @@ function juego(tecla, letra, noPermitidas) {
         crearLetras(tecla, letra);
         if (p.length === buenasLetras.length) {
             ganasteAlerta();
-
         } 
     }
         for (let i = 0; i < noPermitidas.length; i++) {
@@ -244,6 +286,11 @@ function reiniciarJuego () {
     p.length = 0
     aleatorio = Math.round(Math.random()* (adivinar.length - 1));
     palabraMisteriosa = adivinar[aleatorio];
+    tm.forEach(element => {
+        element.classList.remove("acierto");
+        element.classList.remove("desacierto");
+    });
+
     reinciarCanvas();  
 }
 function formarPalabra() {
