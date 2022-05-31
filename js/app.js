@@ -113,7 +113,7 @@ function alertaError() {
     swal("Ups!", "Solo letras y que sean mayúsculas, por favor", "error", {button: false});
 }
 function alertaTouchfuera() {
-    swal("Ups!", "No le diste a la letra", "error", {button: false});
+    swal("Ups!", "No le diste a la letra", "error");
 }
 function crearTd() {
     let tdletra = document.createElement("td");
