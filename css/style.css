@@ -7,11 +7,9 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%;
-    
 }
 *, *:before, *:after {
     box-sizing: inherit;
-    
 }
 body {
     font-family: var(--fuente);
@@ -27,8 +25,7 @@ img {
     max-width: 100%;
 }
 .logo {
-    margin: 4rem 0 0 0;
-    
+    margin: 4rem 0 0 0;   
 }
 .contenedor {
     margin: 0 auto;
@@ -44,7 +41,6 @@ img {
 .boton1:hover, .boton2:hover {
     cursor: pointer;
     box-shadow: 0px 5px 15px 1px rgba(0,0,0,0.40);
-
 }
 .boton1 {
     width: 31rem;
@@ -92,7 +88,6 @@ img {
     font-size: 1.5rem;
     margin-bottom: 0;
 }
-
 .canvasOn { 
     display: flex;
     flex-direction: row;
