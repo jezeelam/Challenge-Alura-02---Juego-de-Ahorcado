@@ -173,6 +173,41 @@ td {
     }
     
 }
+.teclado {
+    display: grid;
+    margin-top: 2rem;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+}
+.teclaAbc {
+    padding: 1rem;
+    height: 4.5rem;
+    text-align: center;
+    width: 4.5rem;
+    font: var(--fuente);
+    margin-bottom: 1.5rem;
+    border: solid 1px var(--colorPrincipal);
+    border-radius: 0.8rem;
+    font-size: 2rem;
+    color: var(--colorPrincipal);
+}
+.y {
+    grid-column: -5;
+}
+.z {
+    grid-column: -3;
+}
+@media (min-width: 768px) {
+    .teclado {
+        display: none;
+    }
+}
+.acierto {
+    background-color: rgb(28, 214, 28);
+}
+.desacierto {
+    background-color: rgb(234, 8, 8);
+}
 .sacar {
     display: none;
     margin: 0;
